@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=VT323&family=Inconsolata:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Terminal Theme Colors */
+  --primary: #000000; /* Pure black background */
+  --secondary: #0a0a0a; /* Slightly lighter black for cards */
+  --accent: #00ff00; /* Terminal green */
+  --accent-secondary: #00cc00; /* Darker terminal green */
+  --text: #00cc00; /* Darker green for regular text */
+  --text-light: #00ff00; /* Bright green for headings */
+
+  /* Terminal cursor color */
+  --cursor-color: #00ff00;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu Mono', 'Inconsolata', monospace;
+  background-color: var(--primary);
+  color: var(--text);
+  -webkit-font-smoothing: none; /* Disable font smoothing for authentic terminal look */
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.5;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.app-container {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #000;
+  background-image:
+    radial-gradient(rgba(0, 255, 0, 0.05) 2px, transparent 2px),
+    radial-gradient(rgba(0, 255, 0, 0.03) 2px, transparent 2px);
+  background-size: 50px 50px, 100px 100px;
+  background-position: 0 0, 25px 25px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Terminal Window styles */
+.terminal-window {
+  position: relative;
+  width: 95%;
+  max-width: 1400px;
+  height: 95vh;
+  margin: 2.5vh auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3), 0 0 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid #00ff00;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-header {
+  height: 30px;
+  background-color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border-bottom: 1px solid #00ff00;
+}
+
+.terminal-title {
+  color: #00ff00;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #00ff00;
+}
+
+.terminal-button-minimize {
+  background-color: #333;
+}
+
+.terminal-button-maximize {
+  background-color: #333;
+}
+
+.terminal-button-close {
+  background-color: #333;
+}
+
+/* Terminal Content styles */
+.terminal-container {
+  position: relative;
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: #000;
+  color: #00ff00;
+  font-family: 'Ubuntu Mono', 'Inconsolata', monospace;
+}
+
+.terminal-history {
+  margin-bottom: 1rem;
+}
+
+.terminal-entry {
+  margin-bottom: 0.5rem;
+}
+
+.terminal-command {
+  color: #00ff00;
+}
+
+.terminal-output {
+  color: #00cc00;
+}
+
+.terminal-error {
+  color: #ff0000;
+}
+
+.terminal-component {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border-left: 2px solid #00ff00;
+}
+
+/* Welcome container and social links */
+.welcome-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.welcome-banner {
+  flex: 1;
+}
+
+.welcome-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ascii-art {
+  color: #00ff00;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  margin: 0;
+  white-space: pre;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ff00;
+  transition: all 0.2s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.2) drop-shadow(0 0 5px rgba(0, 255, 0, 0.7));
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.5rem;
+  height: 1rem;
+  background-color: #00ff00;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+  border: 1px solid var(--accent);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 0;
+  border: 1px solid var(--accent);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+/* Terminal scanlines effect */
+.terminal-scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 255, 0, 0.03) 50%,
+    rgba(0, 0, 0, 0) 51%
+  );
+  background-size: 100% 4px;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.15;
+}
